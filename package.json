@@ -4,7 +4,9 @@
   "description": "CSS Houdini PaintWorklet for Tesla coil",
   "main": "dist/worklet.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "make publish",
+    "prepack": "make publish"
   },
   "repository": {
     "type": "git",
