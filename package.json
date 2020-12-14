@@ -1,0 +1,39 @@
+{
+  "name": "houdini-tesla",
+  "version": "0.0.1",
+  "description": "CSS Houdini PaintWorklet for Tesla coil",
+  "main": "dist/worklet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jh3y/houdini-tesla.git"
+  },
+  "files": [
+    "dist/*",
+    "README.md"
+  ],
+  "keywords": [
+    "CSS",
+    "Houdini",
+    "Worklet",
+    "PaintWorklet"
+  ],
+  "author": "Jhey Tompkins <jh3y@users.noreply.github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jh3y/houdini-tesal/issues"
+  },
+  "homepage": "https://github.com/jh3y/houdini-tesla#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "autoprefixer": "^10.1.0",
+    "browser-sync": "^2.26.13",
+    "postcss": "^8.2.1",
+    "postcss-cli": "^8.3.1",
+    "pug-cli": "^1.0.0-alpha6",
+    "stylus": "^0.54.8"
+  }
+}
