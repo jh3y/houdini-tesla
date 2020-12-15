@@ -1,21 +1,29 @@
 if (typeof registerPaint !== 'undefined') {
-  const PROPS = [
-    '--tesla', // Trick here is to listen something being animated so it triggers repaint
-    '--tesla-hue',
-    '--tesla-saturation',
-    '--tesla-lightness',
-    '--tesla-blur',
-    '--tesla-width',
-    '--tesla-segments',
-    '--tesla-angle',
-  ]
   class TeslaCoil {
     static get inputProperties() {
-      return PROPS
+      return [
+        '--tesla', // Trick here is to listen something being animated so it triggers repaint
+        '--tesla-hue',
+        '--tesla-saturation',
+        '--tesla-lightness',
+        '--tesla-blur',
+        '--tesla-width',
+        '--tesla-segments',
+        '--tesla-angle',
+      ]
     }
 
     parseProps(props) {
-      return PROPS.map((prop) => props.get(prop).toString().trim())
+      return [
+        '--tesla',
+        '--tesla-hue',
+        '--tesla-saturation',
+        '--tesla-lightness',
+        '--tesla-blur',
+        '--tesla-width',
+        '--tesla-segments',
+        '--tesla-angle',
+      ].map((prop) => props.get(prop).toString().trim())
     }
 
     getRandom(min, max) {
@@ -48,7 +56,7 @@ if (typeof registerPaint !== 'undefined') {
           refX = x
           refY = y
           result.push([x, y])
-          if (getDistance(x, y) > (endX / SEGMENTS)) {
+          if (getDistance(x, y) > endX / SEGMENTS) {
             addSegment(x, y)
           }
         } else {
@@ -70,9 +78,17 @@ if (typeof registerPaint !== 'undefined') {
 
     paint(ctx, size, properties) {
       this.__ctx = ctx
-      const [, hue, saturation, lightness, blur, width, segments, angle] = this.parseProps(
-        properties
-      )
+      this.__props = properties
+      const [
+        ,
+        hue,
+        saturation,
+        lightness,
+        blur,
+        width,
+        segments,
+        angle,
+      ] = this.parseProps(properties)
       // Store in class
       this.__segments = segments
       this.__angle = angle
@@ -83,7 +99,13 @@ if (typeof registerPaint !== 'undefined') {
       ctx.strokeStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`
       ctx.shadowColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`
       ctx.shadowBlur = blur
-      this.drawLine(ctx, -width, parseInt(size.width, 10) + parseInt(width, 10), size.height * 0.5, size.height * 0.5)
+      this.drawLine(
+        ctx,
+        -width,
+        parseInt(size.width, 10) + parseInt(width, 10),
+        size.height * 0.5,
+        size.height * 0.5
+      )
     }
   }
 

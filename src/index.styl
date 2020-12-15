@@ -1,40 +1,36 @@
-// This is where we use the custom properties
-@property --tesla-trip {
-  syntax: '<integer>';
-  inherits: true;
-  initial-value: 0;
+/* Bit of a hack but animate height by 0.1px to trigger repaint */
+@keyframes coil {
+  50% {
+    height: var(--h);
+  }
 }
 
-@keyframes coil {
-  0%, 100% {
-    --tesla-trip: 0;
-  }
-  50% {
-    --tesla-trip: var(--tesla-variance);
-  }
+.tesla:active {
+  --spread: 4;
+  animation: coil .1s infinite linear;
 }
 
 @supports (background: paint(something)) {
-  .tesla {
-    /*
-      Optionally set property values.
-      This can be done at root or local scope
-    */
-    --tesla: var(--tesla-trip); /* Animated noise with property, hack to animate? */
-    --tesla-variance: 10000;
-    --tesla-hue: 0;
-    --tesla-saturation: 50;
-    --tesla-lightness: 50;
-    --tesla-blur: 10;
-    --tesla-width: 10;
-    --tesla-angle: 45;
-    --tesla-segments: 2;
-    background: paint(tesla-coil);
+  // This is where we use the custom properties
+  @property --tesla-trip {
+    syntax: '<integer>';
+    inherits: true;
+    initial-value: 0;
   }
-
+  .tesla {
+    --tesla: var(--tesla-trip); /* Animated noise with property, hack to animate? */
+    --tesla-variance: 100;
+  }
+  @keyframes c {
+    0%, 100% {
+      --tesla-trip: 0;
+    }
+    50% {
+      --tesla-trip: var(--tesla-variance);
+    }
+  }
   .tesla:active {
-    --spread: 4;
-    animation: coil 5s infinite linear;
+    animation: c .5s infinite linear;
   }
 }
 
@@ -52,6 +48,13 @@ body {
 }
 
 .tesla {
+  --tesla-hue: 180;
+  --tesla-saturation: 100;
+  --tesla-lightness: 50;
+  --tesla-blur: 10;
+  --tesla-width: 10;
+  --tesla-angle: 45;
+  --tesla-segments: 8;
   --lightness: 50;
   --spread: 10;
   --color: 'hsl(%s, %s, %s)' % (var(--tesla-hue) calc(var(--tesla-saturation) * 1%) calc(var(--tesla-lightness) * 1%))
@@ -66,6 +69,8 @@ body {
   outline: transparent;
   box-shadow: '0 0px %s 0 %s;' % (calc(var(--spread) * 1px) var(--color))
   transition: box-shadow 0.1s, transform 0.1s;
+  background: paint(tesla-coil);
+  background-color: black;
 }
 
 .tesla:hover {

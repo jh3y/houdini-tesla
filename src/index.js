@@ -14,7 +14,7 @@ import { GUI } from 'https://cdn.skypack.dev/dat.gui'
     initialValue: 2,
   })
 
-  CSS.paintWorklet.addModule(`/worklet.js`)
+  CSS.paintWorklet.addModule(`https://unpkg.com/houdini-tesla`)
 
   const CONFIG = {
     WIDTH: 5,
@@ -22,11 +22,12 @@ import { GUI } from 'https://cdn.skypack.dev/dat.gui'
     HUE: 180,
     SATURATION: 100,
     LIGHTNESS: 50,
-    SEGMENTS: 2,
+    SEGMENTS: 8,
     ANGLE: 45,
   }
 
   const TESLA = document.querySelector('.tesla')
+  document.documentElement.style.setProperty('--h', TESLA.offsetHeight - 0.1 + 'px')
 
   const UPDATE = () => {
     TESLA.style.setProperty('--tesla-width', CONFIG.WIDTH)
